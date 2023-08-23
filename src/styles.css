@@ -3,15 +3,15 @@ body{
 }
 
 section{
-    -ms-overflow-style: none;
+    -ms-overflow-style: none; /* Gestion IE */
     display: flex;
     flex-wrap: nowrap;
     max-width: 44rem;
     overflow: scroll;
-    scrollbar-width: none;
+    scrollbar-width: none; /* Gestion standard */
 }
 section::-webkit-scrollbar{
-    display: none;
+    display: none; /* Gestion base chromium */
 }
 
 .carrouselItems img {
