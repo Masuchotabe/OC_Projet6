@@ -2,9 +2,18 @@ body{
     background-color: black;
 }
 
+.container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: fit-content;
+    /*justify-content: center;*/
+}
+
 section{
     -ms-overflow-style: none; /* Gestion IE */
     display: flex;
+    flex-direction: row;
     flex-wrap: nowrap;
     max-width: 44rem;
     overflow: scroll;
@@ -13,8 +22,13 @@ section{
 section::-webkit-scrollbar{
     display: none; /* Gestion base chromium */
 }
+.carrouselItems {
+    /*border-radius: 1rem;*/
+    /*overflow: hidden;*/
+}
 
 .carrouselItems img {
+    border-radius: 0.5rem;
     width: 10rem;
     margin: 0.5rem;
 
