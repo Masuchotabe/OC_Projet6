@@ -44,7 +44,7 @@ function create_section_items(item_list, section){
         const image = document.createElement('img')
         image.src = item.image_url
         image.alt = item.title
-        div.className = "carrouselItems"
+        div.className = "carousel-item"
         div.appendChild(image)
         section.appendChild(div)
     })
