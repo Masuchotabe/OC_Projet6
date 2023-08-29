@@ -38,7 +38,7 @@ async function get_first_result(number_of_items, url_to_fetch){
     return null
 }
 
-function create_section_items(item_list, section){
+function create_section_items(item_list, carousel_container){
     item_list.forEach(item => {
         const div = document.createElement('div')
         const image = document.createElement('img')
@@ -46,7 +46,7 @@ function create_section_items(item_list, section){
         image.alt = item.title
         div.className = "carousel-item"
         div.appendChild(image)
-        section.appendChild(div)
+        carousel_container.appendChild(div)
     })
 }
 let base_url = 'http://localhost:8000/api/v1/'
@@ -60,8 +60,9 @@ async function main(){
     // console.log(get_first_result(7, base_url+uri3))
     // console.log(some_data)
     let data = await get_first_result(7, base_url+uri1)
-    let section1 = document.getElementById('FantasySection')
-    await create_section_items(data,section1)
+    let carousel_container_1 = document.querySelector('#FantasySection .carousel-container')
+    console.log(carousel_container_1)
+    await create_section_items(data, carousel_container_1)
     get_first_result(7, base_url+uri2)
     get_first_result(7, base_url+uri3)
 }

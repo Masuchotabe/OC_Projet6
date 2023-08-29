@@ -18,22 +18,31 @@ body{
 /*}*/
 
 
-.carousel-container {
+.container {
     -ms-overflow-style: none; /* Gestion IE */
 
     position: relative;
     width: 80%;
     max-width: 800px;
-    overflow: scroll;
+    overflow-x: hidden;
+    overflow-y: scroll;
     scrollbar-width: none; /* Gestion standard */
 }
-.carousel-container::-webkit-scrollbar{
+.container::-webkit-scrollbar{
     display: none; /* Gestion base chromium */
 }
 
-.carousel {
+.carousel-container {
     display: flex;
+    flex-direction: row;
+    overflow-x: scroll;
+    -ms-overflow-style: none; /* Gestion IE */
+    scrollbar-width: none; /* Gestion standard */
+
     transition: transform 0.5s ease-in-out;
+}
+carousel-container::-webkit-scrollbar{
+    display: none; /* Gestion base chromium */
 }
 
 .carousel-item {
@@ -46,6 +55,22 @@ body{
     margin: 0 10px;
 }
 
+.carousel-button {
+  width:48px;
+  height:48px;
+  padding:0;
+  border:0;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  pointer-events:all;
+  cursor:pointer;
+  color: white;
+  background:deepskyblue;
+  border-radius:50%;
+  /*box-shadow:var(--carousel-button-shadow, none);*/
+  transition:opacity .15s ease
+}
 /*section{*/
 /*    -ms-overflow-style: none; !* Gestion IE *!*/
 /*    !*display: flex;*!*/
