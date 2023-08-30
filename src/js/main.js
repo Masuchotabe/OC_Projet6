@@ -38,7 +38,10 @@ class Carousel {
         console.log('nexxxxxt')
         let width = - this.container.children[0].getBoundingClientRect().width
         console.log(width)
-        this.container.style.transform = 'translateX(' + width + 'px)'
+        this.container.scroll({
+            left: -width,
+            behavior: "smooth",
+            });
     }
 
     previous () {
