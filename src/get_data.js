@@ -38,33 +38,53 @@ async function get_first_result(number_of_items, url_to_fetch){
     return null
 }
 
-function create_section_items(item_list, carousel_container){
+function create_div_with_class(class_name){
+    let div = document.createElement('div')
+    div.className=class_name
+    return div
+}
+
+function create_div_from_data(item_list, genre){
+    const container = document.querySelector(".container")
+
+    const carousel = create_div_with_class("carousel")
+    carousel.setAttribute('id', genre)
+    const carousel_container = create_div_with_class("carousel-container")
     item_list.forEach(item => {
-        const div = document.createElement('div')
-        const image = document.createElement('img')
+        let child_div = create_div_with_class('carousel-item')
+        let image = document.createElement('img')
         image.src = item.image_url
         image.alt = item.title
-        div.className = "carousel-item"
-        div.appendChild(image)
-        carousel_container.appendChild(div)
+        child_div.appendChild(image)
+        carousel_container.appendChild(child_div)
     })
+    carousel.appendChild(carousel_container)
+    container.appendChild(carousel)
 }
-let base_url = 'http://localhost:8000/api/v1/'
-let uri1 = 'titles/?genre=Fantasy&sort_by=-imdb_score'
-let uri2 = 'titles/?genre=War&sort_by=-imdb_score'
-let uri3 = 'titles/?genre=Comedy&sort_by=-imdb_score'
+
+
+
+async function init_data(url, genre){
+    let items = await get_first_result(7, url)
+    await create_div_from_data(items, genre)
+    // return;
+}
+
 
 async function main(){
-    // console.log(get_first_result(7, base_url+uri1))
-    // console.log(get_first_result(7, base_url+uri2))
-    // console.log(get_first_result(7, base_url+uri3))
-    // console.log(some_data)
-    let data = await get_first_result(7, base_url+uri1)
-    let carousel_container_1 = document.querySelector('#FantasySection .carousel-container')
-    console.log(carousel_container_1)
-    await create_section_items(data, carousel_container_1)
-    get_first_result(7, base_url+uri2)
-    get_first_result(7, base_url+uri3)
+    let base_url = 'http://localhost:8000/api/v1/'
+    let genres = ["Fantasy", "War", "Comedy"]
+    let promise_to_wait = []
+
+    genres.forEach(genre => {
+        promise_to_wait.push(init_data(base_url + `titles/?genre=${genre}&sort_by=-imdb_score`, genre))
+    })
+
+    await Promise.all(promise_to_wait)
+    // console.log(uri_list)
+    const event = new Event('AllDataComplete');
+    document.dispatchEvent(event);
+
 }
 
 main()
