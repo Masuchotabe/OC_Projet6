@@ -12,9 +12,9 @@ class Carousel {
             slides_to_scroll:1,
             slides_visible:3
         }, options)
-        this.create_navigation()
-        this.container = this.element.querySelector(".carousel-container")
 
+        this.container = this.element.querySelector(".carousel-container")
+        this.create_navigation()
         // console.log(container.children.length)
         // let ratio = container.children.length / this.options.slides_visible
         //
@@ -26,26 +26,46 @@ class Carousel {
     }
 
     create_navigation () {
-        let next_button = this.create_div_with_class("carousel-button next")
-        let previous_button = this.create_div_with_class("carousel-button previous")
-        this.element.appendChild(next_button)
-        this.element.appendChild(previous_button)
-        next_button.addEventListener("click", this.next.bind(this))
-        previous_button.addEventListener("click", this.previous.bind(this))
+        this.next_button = this.create_div_with_class("carousel-button next")
+        this.previous_button = this.create_div_with_class("carousel-button previous")
+        this.element.appendChild(this.next_button)
+        this.element.appendChild(this.previous_button)
+        this.next_button.addEventListener("click", this.next.bind(this))
+        this.previous_button.addEventListener("click", this.previous.bind(this))
+        this.check_display_nav_buttons()
     }
 
+    check_display_nav_buttons() {
+        if (this.container.scrollLeft == 0){
+            this.previous_button.classList.add('button-hidden')
+
+        } else if (this.container.scrollLeft == this.container.scrollLeftMax){
+            this.next_button.classList.add('button-hidden')
+        }
+    }
     next () {
         console.log('nexxxxxt')
-        let width = - this.container.children[0].getBoundingClientRect().width
-        console.log(width)
-        this.container.scroll({
-            left: -width,
-            behavior: "smooth",
-            });
+        let width = this.container.getBoundingClientRect().width
+
+        this.container.scrollBy({
+            top: 0,
+            left: width,
+            behavior:'smooth'
+        })
+        //     left: -width,
+        //     behavior: "smooth",
+        //     });
     }
 
     previous () {
         console.log('previouuuuus')
+        let width = this.container.getBoundingClientRect().width
+
+        this.container.scrollBy({
+            top:0,
+            left:-width,
+            behavior:'smooth'
+        })
 
     }
 
