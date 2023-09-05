@@ -15,8 +15,8 @@ body{
     position: relative;
     width: 80%;
     max-width: 800px;
-    overflow-x: hidden;
-    overflow-y: scroll;
+    /*overflow-x: hidden;*/
+    /*overflow-y: scroll;*/
     scrollbar-width: none; /* Gestion standard */
 }
 .container::-webkit-scrollbar{
@@ -73,7 +73,7 @@ carousel-container::-webkit-scrollbar{
     left:-20px;
 }
 .carousel-button.next{
-    right: 0;
+    right:-20px;
 }
 
 /*section{*/

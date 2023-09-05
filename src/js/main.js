@@ -12,8 +12,9 @@ class Carousel {
             slides_to_scroll:1,
             slides_visible:3
         }, options)
-
         this.container = this.element.querySelector(".carousel-container")
+        this.child_width = Math.max(...Array.from(this.container).map(div => div.clientWidth))
+        // this.container.
         this.create_navigation()
         // console.log(container.children.length)
         // let ratio = container.children.length / this.options.slides_visible
@@ -83,6 +84,14 @@ class Carousel {
 document.addEventListener('AllDataComplete', function () {
 
     new Carousel(document.querySelector('#War'), {
+        slides_to_scroll: 1,
+        slides_visible: 3
+    })
+    new Carousel(document.querySelector('#Fantasy'), {
+        slides_to_scroll: 1,
+        slides_visible: 3
+    })
+    new Carousel(document.querySelector('#Comedy'), {
         slides_to_scroll: 1,
         slides_visible: 3
     })
