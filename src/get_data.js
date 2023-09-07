@@ -12,10 +12,25 @@ async function get_first_result(number_of_items, url_to_fetch){
 
     while (number_of_fetch_item < number_of_items) {
         let response = await fetch(url)
-        let data = await response.json()
+        let data
+        if (response.ok){
+            data = await response.json()
+        }else{
+            continue
+        }
+
 
         for (const item of data.results){
-            // console.log(item)
+            //  On vérifie qu'on arrive bien à récupérer l'image sinon on continue
+            try {
+                const image_response = await fetch(item.image_url)
+                if (!image_response.ok) {
+                    continue
+                }
+            } catch (error) {
+                console.log("Erreur pour récupérer une image : " + error.message)
+                continue
+            }
             if (number_of_fetch_item < number_of_items) {
                 item_list.push(item)
                 number_of_fetch_item++
