@@ -1,3 +1,13 @@
+:root{
+    -ms-overflow-style: none; /* Gestion IE */
+    scrollbar-width: none; /* Gestion standard */
+}
+:root::-webkit-scrollbar{
+    display: none; /* Gestion base chromium */
+}
+
+
+
 body{
     background-color: black;
     margin: 0;
@@ -6,22 +16,89 @@ body{
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-direction: column;
     /*height: 100vh;*/
 }
-
-.container {
-    -ms-overflow-style: none; /* Gestion IE */
-
-    position: relative;
+header {
+    max-height: 20vh;
     width: 80%;
-    max-width: 800px;
+    max-width: 1000px;
+    display: flex;
+
+    background-color: antiquewhite;
+}
+header img {
+    max-height: 150px;
+}
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    position: relative;
+    /*margin-top: 5vh;*/
+    width: 80%;
+    max-width: 1000px;
     /*overflow-x: hidden;*/
     /*overflow-y: scroll;*/
-    scrollbar-width: none; /* Gestion standard */
 }
-.container::-webkit-scrollbar{
-    display: none; /* Gestion base chromium */
+
+
+/* CSS Best-movie */
+.best-movie {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px;
+    background-color: #000;
+    color: #fff;
 }
+.movie-details {
+    flex: 2;
+    padding: 20px;
+}
+
+.movie-title {
+    /*font-size: 24px;*/
+    /*margin-bottom: 10px;*/
+}
+
+.movie-description {
+    font-size: 16px;
+    margin-bottom: 20px;
+}
+
+.movie-details button {
+    background-color: #fcfbfb;
+    color: #000;
+    border: none;
+    border-radius: 8px;
+    padding: 10px 20px;
+
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.movie-details button:hover {
+    background-color: #ffffff95;
+    scale: 1.1;
+    transition: background-color 0.3s ease;
+
+}
+.image-container{
+    flex:1;
+    text-align: center;
+}
+
+.image-container img {
+    width: 100%;
+    max-width: 400px;
+    height: auto;
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.5);
+}
+/* CSS carousel*/
 
 .carousel{
     position: relative;
@@ -34,24 +111,29 @@ body{
     /*flex-grow: 0;*/
     flex-direction: row;
     overflow-x: scroll;
+
     -ms-overflow-style: none; /* Gestion IE */
     scrollbar-width: none; /* Gestion standard */
 
     transition: transform 0.5s ease-in-out;
 }
-carousel-container::-webkit-scrollbar{
+.carousel-container::-webkit-scrollbar{
     display: none; /* Gestion base chromium */
 }
 
 .carousel-item {
-    flex: 0 0 25%;
+    flex: 1 0 25%;
+    display: flex;
+    justify-content: center;
+    align-content: center;
     /*flex-grow:0;*/
-    padding: 20px;
+    /*padding: 20px;*/
     text-align: center;
-    background-color: white;
+    /*background-color: white;*/
     border-radius: 10px;
     /*box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);*/
-    margin: 0 10px;
+    /*margin: 0 10px;*/
+    margin: 0 auto;
 }
 
 .carousel-button {
@@ -74,6 +156,19 @@ carousel-container::-webkit-scrollbar{
 }
 .carousel-button.next{
     right:-20px;
+}
+.button-hidden{
+    display: None;
+}
+.carousel img {
+    width: 100%;
+    max-width: 182px;
+    height: 100%;
+    max-height: 268px;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
 }
 
 /*section{*/

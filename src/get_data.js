@@ -1,3 +1,6 @@
+const base_url = 'http://localhost:8000/api/v1/'
+
+
 
 /**
  * Cette fonction récupère le nombre d'éléments souhaités à partir de l'url demandé

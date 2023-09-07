@@ -8,14 +8,12 @@ class Carousel {
      */
     constructor(element, options = {}) {
         this.element = element
-        this.options = Object.assign({},{
-            slides_to_scroll:1,
-            slides_visible:3
-        }, options)
         this.container = this.element.querySelector(".carousel-container")
-        this.child_width = Math.max(...Array.from(this.container).map(div => div.clientWidth))
-        // this.container.
+        // this.child_width = Math.max(...Array.from(this.container.children).map(div => div.clientWidth))
+        // for()
+        // this.container.style.width = 3 * this.child_width + 'px'
         this.create_navigation()
+        this.container.addEventListener('scroll', () => this.check_display_nav_buttons())
         // console.log(container.children.length)
         // let ratio = container.children.length / this.options.slides_visible
         //
@@ -37,15 +35,21 @@ class Carousel {
     }
 
     check_display_nav_buttons() {
+        // console.log(this.container)
         if (this.container.scrollLeft == 0){
             this.previous_button.classList.add('button-hidden')
 
-        } else if (this.container.scrollLeft == this.container.scrollLeftMax){
+        } else if (this.container.scrollLeft + this.container.offsetWidth == this.container.scrollWidth){ //TODO A MODIFIER scrollleftmax
             this.next_button.classList.add('button-hidden')
+        } else {
+            this.next_button.classList.remove('button-hidden')
+            this.previous_button.classList.remove('button-hidden')
+
         }
+
+
     }
     next () {
-        console.log('nexxxxxt')
         let width = this.container.getBoundingClientRect().width
 
         this.container.scrollBy({
@@ -53,13 +57,9 @@ class Carousel {
             left: width,
             behavior:'smooth'
         })
-        //     left: -width,
-        //     behavior: "smooth",
-        //     });
     }
 
     previous () {
-        console.log('previouuuuus')
         let width = this.container.getBoundingClientRect().width
 
         this.container.scrollBy({
@@ -86,16 +86,10 @@ document.addEventListener('AllDataComplete', function () {
     new Carousel(document.querySelector('#best-rated'), {
     })
     new Carousel(document.querySelector('#War'), {
-        slides_to_scroll: 1,
-        slides_visible: 3
     })
     new Carousel(document.querySelector('#Fantasy'), {
-        slides_to_scroll: 1,
-        slides_visible: 3
     })
     new Carousel(document.querySelector('#Comedy'), {
-        slides_to_scroll: 1,
-        slides_visible: 3
     })
 })
 
