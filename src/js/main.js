@@ -83,6 +83,8 @@ class Carousel {
 
 document.addEventListener('AllDataComplete', function () {
 
+    new Carousel(document.querySelector('#best-rated'), {
+    })
     new Carousel(document.querySelector('#War'), {
         slides_to_scroll: 1,
         slides_visible: 3
