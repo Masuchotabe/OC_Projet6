@@ -25,15 +25,15 @@ async function get_first_result(number_of_items, url_to_fetch){
 
         for (const item of data.results){
             //  On vérifie qu'on arrive bien à récupérer l'image sinon on continue
-            try {
-                const image_response = await fetch(item.image_url)
-                if (!image_response.ok) {
-                    continue
-                }
-            } catch (error) {
-                console.log("Erreur pour récupérer une image : " + error.message)
-                continue
-            }
+            // try {
+            //     const image_response = await fetch(item.image_url)
+            //     if (!image_response.ok) {
+            //         continue
+            //     }
+            // } catch (error) {
+            //     console.log("Erreur pour récupérer une image : " + error.message)
+            //     continue
+            // }
             if (number_of_fetch_item < number_of_items) {
                 item_list.push(item)
                 number_of_fetch_item++
@@ -67,15 +67,24 @@ async function get_film(film_id){
 }
 
 
-function create_HTML_element_with_class(class_name, elm_type='div'){
+export function create_HTML_element_with_class(class_name, elm_type='div'){
     let elm = document.createElement(elm_type)
     elm.className=class_name
     return elm
 }
+
 function create_img_from_data(img_data){
     let image = document.createElement('img')
     image.src = img_data.image_url
     image.alt = img_data.title
+    image.onerror = function() {
+        this.src="images/logo.png"
+        this.classList.add("image-not-found")
+        let parent_div = this.parentElement
+        let title = create_HTML_element_with_class("no-image-title","p")
+        title.textContent = this.alt
+        parent_div.appendChild(title)
+    }
     return image
 }
 
@@ -113,7 +122,7 @@ async function create_best_film_div(film_data){
     title.textContent = film_data.title
     details_div.appendChild(title)
     let button = document.createElement("button")
-    button.textContent = "Détails"
+    button.textContent = "Details"
     details_div.appendChild(button)
     let description  =create_HTML_element_with_class("movie-tiny-desc", "p")
     description.textContent = film_data.description
@@ -133,7 +142,7 @@ async function init_best_scored_data(url){
     let items = await get_first_result(8, url)
     let first_item = await get_film(items[0].id)
     await create_best_film_div(first_item)
-    await create_carousel_from_data(items.slice(1), 'best-rated')
+    await create_carousel_from_data(items.slice(1), 'top-rated')
     // return;
 }
 

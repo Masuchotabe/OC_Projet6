@@ -6,15 +6,25 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="styles.css">
     <title>Title</title>
-    <script src="get_data.js" async></script>
-    <script src="js/main.js" defer></script>
+    <script src="js/get_data.js" async></script>
+    <script src="js/main.js" type="module" defer></script>
 </head>
 
 <body>
     <header>
-        <img src="images/logo.png">
-        <a href="#">Accueil</a>
-        <a href="#">Catégories</a>
+        <nav class="nav-bar">
+            <div class="logo">
+                <img src="images/logo.png">
+            </div>
+            <ul class="menu">
+                <li>
+                    <a href="#">Home</a>
+                </li>
+                <li>
+                    <a href="#">Categories</a>
+                </li>
+            </ul>
+        </nav>
     </header>
     <div class="container">
 

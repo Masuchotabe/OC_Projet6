@@ -1,13 +1,14 @@
+import { create_HTML_element_with_class, get_film } from "./get_data.js"
+
 class Carousel {
     /**
-     *
      * @param {HTMLElement} element
-     * @param options
-     * @param options.slides_to_scroll Nombre d'éléments à scroll
-     * @param options.slides_visible Nombre d'éléments visible
      */
-    constructor(element, options = {}) {
+    constructor(element) {
         this.element = element
+        let title = create_HTML_element_with_class("carousel-title", "h1")
+        title.textContent = this.get_capitalize_title(this.element.getAttribute('id').toString())
+        this.element.insertBefore(title, this.element.firstChild )
         this.container = this.element.querySelector(".carousel-container")
         // this.child_width = Math.max(...Array.from(this.container.children).map(div => div.clientWidth))
         // for()
@@ -22,6 +23,14 @@ class Carousel {
         //     elm.style.width = ratio*100 + '%'
         // }
         // // this.element.appendChild(container)
+    }
+
+    get_capitalize_title(original_title){
+        // let words = original_title.replace('-', " ").split(" ")
+        return original_title.replace('-', " ").split(" ").map((word) => {
+            return word[0].toUpperCase() + word.substring(1);
+        }).join(" ");
+
     }
 
     create_navigation () {
@@ -83,7 +92,7 @@ class Carousel {
 
 document.addEventListener('AllDataComplete', function () {
 
-    new Carousel(document.querySelector('#best-rated'), {
+    new Carousel(document.querySelector('#top-rated'), {
     })
     new Carousel(document.querySelector('#War'), {
     })
