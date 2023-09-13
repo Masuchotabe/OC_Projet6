@@ -56,7 +56,7 @@ async function get_first_result(number_of_items, url_to_fetch){
     return null
 }
 
-async function get_film(film_id){
+export async function get_film(film_id){
     let url = base_url + `titles/${film_id}`
     let response = await fetch(url)
     let data

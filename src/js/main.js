@@ -46,13 +46,13 @@ class Carousel {
     check_display_nav_buttons() {
         // console.log(this.container)
         if (this.container.scrollLeft == 0){
-            this.previous_button.classList.add('button-hidden')
+            this.previous_button.classList.add('hidden')
 
         } else if (this.container.scrollLeft + this.container.offsetWidth == this.container.scrollWidth){ //TODO A MODIFIER scrollleftmax
-            this.next_button.classList.add('button-hidden')
+            this.next_button.classList.add('hidden')
         } else {
-            this.next_button.classList.remove('button-hidden')
-            this.previous_button.classList.remove('button-hidden')
+            this.next_button.classList.remove('hidden')
+            this.previous_button.classList.remove('hidden')
 
         }
 

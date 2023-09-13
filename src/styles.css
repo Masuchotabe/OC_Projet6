@@ -199,8 +199,8 @@ header{
 .carousel-button.next{
     right:-20px;
 }
-.button-hidden{
-    display: None;
+.hidden{
+    display: None !important;
 }
 .carousel img {
     width: 100%;
@@ -229,28 +229,15 @@ header{
     padding-bottom: 1rem;
 }
 
-/*section{*/
-/*    -ms-overflow-style: none; !* Gestion IE *!*/
-/*    !*display: flex;*!*/
-/*    !*flex-direction: row;*!*/
-/*    !*flex-wrap: nowrap;*!*/
-/*    !*max-width: 44rem;*!*/
-/*    !*overflow: scroll;*!*/
-/*    scrollbar-width: none; !* Gestion standard *!*/
-/*}*/
-/*section::-webkit-scrollbar{*/
-/*    display: none; !* Gestion base chromium *!*/
-/*}*/
-
-
-/*.carrouselItems {*/
-/*    !*border-radius: 1rem;*!*/
-/*    !*overflow: hidden;*!*/
-/*}*/
-
-/*.carrouselItems img {*/
-/*    border-radius: 0.5rem;*/
-/*    width: 10rem;*/
-/*    margin: 0.5rem;*/
-
-/*}*/
+.popup {
+    display: flex;
+    position: fixed;
+    z-index: 10;
+    top: 10vh;
+    left: 10vw;
+    width: 80vw;
+    height: 80vh;
+    background: rgba(152, 76, 76, 0.7);
+    justify-content: center;
+    align-items: center;
+}
