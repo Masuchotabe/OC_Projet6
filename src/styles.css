@@ -99,7 +99,7 @@ header{
     margin-bottom: 20px;
 }
 
-.movie-details button {
+button {
     background-color: #fcfbfb;
     color: #000;
     border: none;
@@ -111,7 +111,7 @@ header{
     transition: background-color 0.3s ease;
 }
 
-.movie-details button:hover {
+button:hover {
     background-color: #ffffff95;
     scale: 1.1;
     transition: background-color 0.3s ease;
@@ -233,11 +233,63 @@ header{
     display: flex;
     position: fixed;
     z-index: 10;
-    top: 10vh;
-    left: 10vw;
-    width: 80vw;
-    height: 80vh;
-    background: rgba(152, 76, 76, 0.7);
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(10, 10, 10, 0.8);
     justify-content: center;
     align-items: center;
+    /*transition: opacity 2.5s linear;*/
+}
+.popup-content{
+    display: flex;
+    position: fixed;
+    z-index: 10;
+    border-radius: 0.5vw;
+    padding: 1rem 2rem 2.5rem 2rem;
+    color:white;
+    text-align: center;
+    /*top: 10vh;*/
+    /*left: 10vw;*/
+    max-width: 50vw;
+    /*height: 80vh;*/
+    background: rgba(0, 0, 0, 0.9);
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.25);
+    justify-content: center;
+    align-items: center;
+    transition: opacity 2.5s linear;
+}
+
+.film-content img {
+    padding: 1rem;
+}
+
+.film-content .content{
+    display: flex;
+    flex-direction: row;
+    text-align: justify;
+}
+
+.film-content .label{
+    font-weight: bold;
+    font-size: large;
+}
+
+.film-content footer{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 5px;
+
+}
+
+
+.popup-content.hidden{
+    visibility: hidden;
+    opacity: 0;
+}
+
+.popup #close-popup {
+    position: absolute;
+    bottom: 10px;
 }

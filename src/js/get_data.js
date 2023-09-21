@@ -1,3 +1,34 @@
+export async function get_film(film_id){
+    let url = base_url + `titles/${film_id}`
+    let response = await fetch(url)
+    let data
+    if (response.ok){
+        data = await response.json()
+    }
+    return data
+}
+
+export function create_HTML_element_with_class(class_name, elm_type='div'){
+    let elm = document.createElement(elm_type)
+    elm.className=class_name
+    return elm
+}
+
+export function create_img_from_data(data){
+    let image = document.createElement('img')
+    image.src = data.image_url
+    image.alt = data.title
+    image.onerror = function() {
+        this.src="images/logo.png"
+        this.classList.add("image-not-found")
+        let parent_div = this.parentElement
+        let title = create_HTML_element_with_class("no-image-title","p")
+        title.textContent = this.alt
+        parent_div.appendChild(title)
+    }
+    return image
+}
+
 const base_url = 'http://localhost:8000/api/v1/'
 
 
@@ -56,39 +87,6 @@ async function get_first_result(number_of_items, url_to_fetch){
     return null
 }
 
-export async function get_film(film_id){
-    let url = base_url + `titles/${film_id}`
-    let response = await fetch(url)
-    let data
-    if (response.ok){
-        data = await response.json()
-    }
-    return data
-}
-
-
-export function create_HTML_element_with_class(class_name, elm_type='div'){
-    let elm = document.createElement(elm_type)
-    elm.className=class_name
-    return elm
-}
-
-function create_img_from_data(img_data){
-    let image = document.createElement('img')
-    image.src = img_data.image_url
-    image.alt = img_data.title
-    image.onerror = function() {
-        this.src="images/logo.png"
-        this.classList.add("image-not-found")
-        let parent_div = this.parentElement
-        let title = create_HTML_element_with_class("no-image-title","p")
-        title.textContent = this.alt
-        parent_div.appendChild(title)
-    }
-    return image
-}
-
-
 function create_carousel_from_data(item_list, carousel_id){
     const container = document.querySelector(".container")
 
@@ -98,6 +96,7 @@ function create_carousel_from_data(item_list, carousel_id){
     item_list.forEach(item => {
 
         let child_div = create_HTML_element_with_class('carousel-item')
+        child_div.dataset.id = item.id
         let image = create_img_from_data(item)
         child_div.appendChild(image)
         carousel_container.appendChild(child_div)
