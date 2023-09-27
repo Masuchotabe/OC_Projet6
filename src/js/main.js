@@ -14,36 +14,33 @@ class Carousel {
         carousel_items.forEach(function(item) {
             item.addEventListener("click", async function(event) {
                 let film_data = await get_film(item.dataset.id)
-                console.log(film_data)
                 init_popup_from_film_data(film_data)
             })
         })
-        // this.child_width = Math.max(...Array.from(this.container.children).map(div => div.clientWidth))
-        // for()
-        // this.container.style.width = 3 * this.child_width + 'px'
+
         this.create_navigation()
         this.container.addEventListener('scroll', () => this.check_display_nav_buttons())
-        // console.log(container.children.length)
-        // let ratio = container.children.length / this.options.slides_visible
-        //
-        // for (let elm of container.children){
-        //     console.log(elm)
-        //     elm.style.width = ratio*100 + '%'
-        // }
-        // // this.element.appendChild(container)
+
     }
 
+    /**
+     * retourne le texte avec une majuscule sur la 1ere lettre de chaque mot
+     * @param original_title
+     * @returns {string}
+     */
     get_capitalize_title(original_title){
-        // let words = original_title.replace('-', " ").split(" ")
         return original_title.replace('-', " ").split(" ").map((word) => {
             return word[0].toUpperCase() + word.substring(1);
         }).join(" ");
 
     }
 
+    /**
+     * Crée les boutons de navigation du carousel
+     */
     create_navigation () {
-        this.next_button = this.create_div_with_class("carousel-button next")
-        this.previous_button = this.create_div_with_class("carousel-button previous")
+        this.next_button = create_HTML_element_with_class("carousel-button next")
+        this.previous_button = create_HTML_element_with_class("carousel-button previous")
         this.element.appendChild(this.next_button)
         this.element.appendChild(this.previous_button)
         this.next_button.addEventListener("click", this.next.bind(this))
@@ -51,21 +48,24 @@ class Carousel {
         this.check_display_nav_buttons()
     }
 
+    /**
+     * Gère l'affichage ou non des boutons de navigation du carousel
+     */
     check_display_nav_buttons() {
-        // console.log(this.container)
         if (this.container.scrollLeft == 0){
             this.previous_button.classList.add('hidden')
 
-        } else if (this.container.scrollLeft + this.container.offsetWidth == this.container.scrollWidth){ //TODO A MODIFIER scrollleftmax
+        } else if (this.container.scrollLeft + this.container.offsetWidth == this.container.scrollWidth){
             this.next_button.classList.add('hidden')
         } else {
             this.next_button.classList.remove('hidden')
             this.previous_button.classList.remove('hidden')
-
         }
-
-
     }
+
+    /**
+     * Gère le déplacement vers la fin du carousel
+     */
     next () {
         let width = this.container.getBoundingClientRect().width
 
@@ -76,6 +76,9 @@ class Carousel {
         })
     }
 
+    /**
+     * Gère le déplacement vers le début du carousel
+     */
     previous () {
         let width = this.container.getBoundingClientRect().width
 
@@ -86,18 +89,12 @@ class Carousel {
         })
 
     }
-
-    /**
-     * @param {string} class_name
-     * @returns {HTMLDivElement}
-     */
-    create_div_with_class(class_name){
-        let div = document.createElement('div')
-        div.className=class_name
-        return div
-    }
 }
 
+/**
+ * Crée la popup à partir des datas du film
+ * @param film_data
+ */
 function init_popup_from_film_data(film_data){
     let popup = document.querySelector('.popup')
     let popup_content = popup.querySelector('.popup-content')
@@ -117,10 +114,11 @@ function init_popup_from_film_data(film_data){
 
 
     let content = create_HTML_element_with_class("content")
-
-    let img = create_img_from_data(film_data)
-    img.classList.add('popup-image')
-    content.appendChild(img)
+    let img_div = create_HTML_element_with_class("image-left")
+    let image = create_img_from_data(film_data)
+    image.classList.add('popup-image')
+    img_div.appendChild(image)
+    content.appendChild(img_div)
 
     let right_block = create_HTML_element_with_class("right-popup-column")
     let description = create_HTML_element_with_class("film_description", "p")
@@ -144,37 +142,42 @@ function init_popup_from_film_data(film_data){
 
     let footer = document.createElement('footer')
     let imdb_score = document.createElement('p')
-    imdb_score.innerHTML = "<span class=\"label\">IMDB Score : </span>" +  film_data.imdb_score
+    imdb_score.innerHTML = get_html_label_tag('IMDB Score') + film_data.imdb_score
     footer.appendChild(imdb_score)
 
     let rated = document.createElement('p')
-    rated.innerHTML = "<span class=\"label\">Rated : </span>" +  film_data.rated
+    rated.innerHTML = get_html_label_tag('Rated') + film_data.rated
     footer.appendChild(rated)
 
     let countries = document.createElement('p')
-    countries.innerHTML = "<span class=\"label\">Countries : </span>" +  film_data.countries
+    countries.innerHTML = get_html_label_tag('Countries') + film_data.countries
     footer.appendChild(countries)
 
     let worldwide_gross_income = document.createElement('p')
-    worldwide_gross_income.innerHTML = "<span class=\"label\">Box office : </span>" +  film_data.worldwide_gross_income
+    worldwide_gross_income.innerHTML = get_html_label_tag('Box office') + film_data.worldwide_gross_income
     footer.appendChild(worldwide_gross_income)
 
     let date_published = document.createElement('p')
-    date_published.innerHTML = "<span class=\"label\">Published Date : </span>" +  film_data.date_published
+    date_published.innerHTML = get_html_label_tag('Published Date') + film_data.date_published
     footer.appendChild(date_published)
 
     let duration = document.createElement('p')
-    duration.innerHTML = "<span class=\"label\">Duration : </span>" +  film_data.duration + 'min'
+    duration.innerHTML = get_html_label_tag('Duration') + film_data.duration + 'min'
     footer.appendChild(duration)
-
-
-
-
 
     film_content.appendChild(footer)
     popup_content.appendChild(film_content)
 
     popup.classList.remove('hidden')
+}
+
+/**
+ * Permet de récupérer un span avec class "label" qui sert de label
+ * @param label
+ * @returns {string}
+ */
+function get_html_label_tag(label){
+    return "<span class=\"label\">" + label + " : </span>"
 }
 
 
@@ -187,6 +190,12 @@ document.addEventListener('AllDataComplete', function () {
     new Carousel(document.querySelector('#Fantasy'), {
     })
     new Carousel(document.querySelector('#Comedy'), {
+    })
+    let best_film = document.querySelector('.best-movie')
+    let best_film_button = best_film.querySelector('button')
+    best_film_button.addEventListener("click", async function(event) {
+        let film_data = await get_film(event.target.dataset.id)
+        init_popup_from_film_data(film_data)
     })
 })
 

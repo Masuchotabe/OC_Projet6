@@ -7,7 +7,6 @@
 }
 
 
-
 body{
     background-color: black;
     margin: 0;
@@ -17,14 +16,12 @@ body{
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    /*height: 100vh;*/
 }
 
 header{
     width: 100%;
 }
 .nav-bar {
-    /*max-height: 20vh;*/
     width: 100%;
     max-width: 1000px;
     margin-inline: auto;
@@ -66,15 +63,12 @@ header{
     align-items: center;
     flex-direction: column;
     position: relative;
-    /*margin-top: 5vh;*/
     width: 80%;
     max-width: 1000px;
-    /*overflow-x: hidden;*/
-    /*overflow-y: scroll;*/
 }
 
-
 /* CSS Best-movie */
+
 .best-movie {
     display: flex;
     flex-direction: row;
@@ -87,11 +81,6 @@ header{
 .movie-details {
     flex: 2;
     padding: 20px;
-}
-
-.movie-title {
-    /*font-size: 24px;*/
-    /*margin-bottom: 10px;*/
 }
 
 .movie-description {
@@ -160,19 +149,14 @@ button:hover {
     display: flex;
     justify-content: center;
     align-content: center;
-    /*flex-grow:0;*/
-    /*padding: 20px;*/
     text-align: center;
-    /*background-color: white;*/
-    border-radius: 10px;
-    /*box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);*/
-    /*margin: 0 10px;*/
     margin: 0 auto;
     position: relative;
     transition:transform 0.2s ease-in-out;
 }
 .carousel-item:hover{
     transform: scale(1.1);
+    /*cursor: pointer;*/
 }
 
 .carousel-button {
@@ -213,6 +197,8 @@ button:hover {
     align-items: center;
 }
 
+/* CSS image non présente */
+
 .image-not-found {
     color: red;
     background-color: grey;
@@ -229,6 +215,8 @@ button:hover {
     padding-bottom: 1rem;
 }
 
+/* POPUP */
+
 .popup {
     display: flex;
     position: fixed;
@@ -240,7 +228,6 @@ button:hover {
     background: rgba(10, 10, 10, 0.8);
     justify-content: center;
     align-items: center;
-    /*transition: opacity 2.5s linear;*/
 }
 .popup-content{
     display: flex;
@@ -250,10 +237,7 @@ button:hover {
     padding: 1rem 2rem 2.5rem 2rem;
     color:white;
     text-align: center;
-    /*top: 10vh;*/
-    /*left: 10vw;*/
     max-width: 50vw;
-    /*height: 80vh;*/
     background: rgba(0, 0, 0, 0.9);
     box-shadow: 0 0 10px rgba(255, 255, 255, 0.25);
     justify-content: center;
@@ -262,7 +246,14 @@ button:hover {
 }
 
 .film-content img {
-    padding: 1rem;
+    width: 100%;
+    max-width: 182px;
+    height: 100%;
+    max-height: 268px;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
 }
 
 .film-content .content{
@@ -283,6 +274,21 @@ button:hover {
 
 }
 
+.right-popup-column{
+    flex:4;
+}
+
+.image-left{
+    position: relative;
+    flex:2;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.image-left .no-image-title{
+    display: None;
+}
 
 .popup-content.hidden{
     visibility: hidden;
@@ -293,3 +299,4 @@ button:hover {
     position: absolute;
     bottom: 10px;
 }
+

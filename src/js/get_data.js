@@ -1,3 +1,8 @@
+/**
+ * Récupère les données d'un film en particulier à partir de l'id
+ * @param film_id
+ * @returns {Promise<*>}
+ */
 export async function get_film(film_id){
     let url = base_url + `titles/${film_id}`
     let response = await fetch(url)
@@ -8,12 +13,23 @@ export async function get_film(film_id){
     return data
 }
 
+/**
+ * Crée un élement html, div par défaut avec la classe correspondante
+ * @param class_name
+ * @param elm_type
+ * @returns {HTMLDivElement}
+ */
 export function create_HTML_element_with_class(class_name, elm_type='div'){
     let elm = document.createElement(elm_type)
     elm.className=class_name
     return elm
 }
 
+/**
+ * Crée une image à partir des données du film
+ * @param data
+ * @returns {HTMLImageElement}
+ */
 export function create_img_from_data(data){
     let image = document.createElement('img')
     image.src = data.image_url
@@ -55,16 +71,7 @@ async function get_first_result(number_of_items, url_to_fetch){
 
 
         for (const item of data.results){
-            //  On vérifie qu'on arrive bien à récupérer l'image sinon on continue
-            // try {
-            //     const image_response = await fetch(item.image_url)
-            //     if (!image_response.ok) {
-            //         continue
-            //     }
-            // } catch (error) {
-            //     console.log("Erreur pour récupérer une image : " + error.message)
-            //     continue
-            // }
+
             if (number_of_fetch_item < number_of_items) {
                 item_list.push(item)
                 number_of_fetch_item++
@@ -79,14 +86,16 @@ async function get_first_result(number_of_items, url_to_fetch){
         }
     }
     if (number_of_items === number_of_fetch_item){
-        console.log('Super, tout les éléments ont été récupérés')
         return item_list
-    } else {
-        console.log("Ohh dommage le nombre d'élément ne correspond pas... nombre obtenu : "+ number_of_fetch_item)
     }
     return null
 }
 
+/**
+ * Crée les div des carousel à oartir des données recues
+ * @param item_list
+ * @param carousel_id
+ */
 function create_carousel_from_data(item_list, carousel_id){
     const container = document.querySelector(".container")
 
@@ -106,12 +115,22 @@ function create_carousel_from_data(item_list, carousel_id){
 }
 
 
-
+/**
+ * Initialise un carousel en récupérant les données puis en créant le carousel à partir des données
+ * @param url
+ * @param carousel_id
+ * @returns {Promise<void>}
+ */
 async function init_categories_data(url, carousel_id){
     let items = await get_first_result(7, url)
     await create_carousel_from_data(items, carousel_id)
 }
 
+/**
+ * Crée la div sur le meilleur film
+ * @param film_data
+ * @returns {Promise<void>}
+ */
 async function create_best_film_div(film_data){
     const container = document.querySelector(".container")
 
@@ -121,6 +140,7 @@ async function create_best_film_div(film_data){
     title.textContent = film_data.title
     details_div.appendChild(title)
     let button = document.createElement("button")
+    button.dataset.id=film_data.id
     button.textContent = "Details"
     details_div.appendChild(button)
     let description  =create_HTML_element_with_class("movie-tiny-desc", "p")
@@ -137,17 +157,23 @@ async function create_best_film_div(film_data){
     container.appendChild(div)
 }
 
+/**
+ * Gère l'initialisation des films les mieux notés ( le meilleur et les 7 suivants)
+ * @param url
+ * @returns {Promise<void>}
+ */
 async function init_best_scored_data(url){
     let items = await get_first_result(8, url)
     let first_item = await get_film(items[0].id)
     await create_best_film_div(first_item)
     await create_carousel_from_data(items.slice(1), 'top-rated')
-    // return;
 }
 
-
+/**
+ * fonction principale qui déclenche la lecture des données puis envoie un evenement pour delchencer la mise en forme
+ * @returns {Promise<void>}
+ */
 async function main(){
-    // let base_url = 'http://localhost:8000/api/v1/'
     let genres = ["Fantasy", "War", "Comedy"]
     let promise_to_wait = []
 
@@ -158,7 +184,6 @@ async function main(){
     })
 
     await Promise.all(promise_to_wait)
-    // console.log(uri_list)
 
     const event = new Event('AllDataComplete');
     document.dispatchEvent(event);
@@ -167,9 +192,3 @@ async function main(){
 
 main()
 
-// main().then(() => {
-//     console.log('Chargement de la page terminé!')
-// }
-// )
-
-// some_data = get_first_result(7, base_url+uri1)
