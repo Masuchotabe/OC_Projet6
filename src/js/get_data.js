@@ -3,7 +3,7 @@
  * @param film_id
  * @returns {Promise<*>}
  */
-export async function get_film(film_id){
+async function get_film(film_id){
     let url = base_url + `titles/${film_id}`
     let response = await fetch(url)
     let data
@@ -19,7 +19,7 @@ export async function get_film(film_id){
  * @param elm_type
  * @returns {HTMLDivElement}
  */
-export function create_HTML_element_with_class(class_name, elm_type='div'){
+function create_HTML_element_with_class(class_name, elm_type='div'){
     let elm = document.createElement(elm_type)
     elm.className=class_name
     return elm
@@ -30,7 +30,7 @@ export function create_HTML_element_with_class(class_name, elm_type='div'){
  * @param data
  * @returns {HTMLImageElement}
  */
-export function create_img_from_data(data){
+function create_img_from_data(data){
     let image = document.createElement('img')
     image.src = data.image_url
     image.alt = data.title

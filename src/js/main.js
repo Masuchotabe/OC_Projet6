@@ -1,5 +1,3 @@
-import { create_HTML_element_with_class, get_film, create_img_from_data } from "./get_data.js"
-
 class Carousel {
     /**
      * @param {HTMLElement} element
