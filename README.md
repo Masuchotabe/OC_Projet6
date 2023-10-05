@@ -5,7 +5,7 @@
   * [Objectif](#objectif)
   * [Technologies utilisées](#technologies-utilis%C3%A9es)
   * [Installation](#installation)
-  * [Dépendances](#d%C3%A9pendances)
+  * [Dépendances(#d%C3%A9pendance)
 <!-- TOC -->
 
 ## Objectif 
@@ -27,7 +27,7 @@ Voir dans la partie [Dépendance](#D%C3%A9pendance) pour l'installation et le la
 
 Lorsque tout est prêt, il suffit d'ouvrir le fichier HTML index.html dans un navigateur.
 
-## Dépendances 
+## Dépendance 
 
 Ce projet a été développé pour fonctionner avec une API en local. 
 
