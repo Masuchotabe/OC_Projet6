@@ -5,7 +5,7 @@
   * [Objectif](#objectif)
   * [Technologies utilisées](#technologies-utilis%C3%A9es)
   * [Installation](#installation)
-  * [Dépendances](#d%C3%A9pendance)
+  * [Dépendance](#d%C3%A9pendance)
 <!-- TOC -->
 
 ## Objectif 
